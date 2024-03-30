@@ -10,9 +10,10 @@ An ideal starting point of a C++ Zorro project with VSCode (Visual Studio Code).
 ## Zorro, C++, and VSCode
 Zorro's native language is "lite-C", however the built-in functions are totally compatible with C and C++ as expected. In the Zorro Help you can find a tutorial about setting up a project in Visual Studio and/or it's compiler for making Zorro scripts: [Developing Algo Trading Systems in C++](https://zorro-project.com/manual/en/dlls.htm).
 
-I made this sample project to kickstart your development; therefore, you don't need to do all the setup procedures every time you start to work on something new. I used the compiler script that Zorro shipped with; if you want to make more complex compilations like extended linker objectives, you need to manipulate the compiler batch located in the Zorro folder in ```Source\VC++\compile.bat``` and ```Source\VC++\compile64.bat```.
+I made this sample project to kickstart your development; therefore, you don't need to do all the setup procedures everytime you start to work on something new. I used the compiler script that Zorro shipped with; if you want to make more complex compilations like extended linker objectives, you need to manipulate the compiler batch located in the Zorro folder in ```Source\VC++\compile.bat``` and ```Source\VC++\compile64.bat```.
 
-The Zorro compile batch scripts are using the Visual Studio C++ compiler, so that's a dependency you also need, even if you don't want to use the Visual Studio IDE. The easiest way is to download the Visual Studio Community Edition and the C++ extensions, as the manual suggests. Then you can start using VSCode with this template.
+> [!IMPORTANT]  
+> The Zorro compile batch scripts are using the Visual Studio C++ compiler, so that's a dependency you also need, even if you don't want to use the Visual Studio IDE. The easiest way is to download the Visual Studio Community Edition and the C++ extensions, as the manual suggests. Then you can start using VSCode with this template.
 
 ## About this Solution
 
