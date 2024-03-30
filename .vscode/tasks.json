@@ -2,39 +2,101 @@
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
     "version": "2.0.0",
+    "presentation": {
+        "echo": false,
+        "showReuseMessage": false
+      },
     "options": {
-        "cwd": "${config:zorroFolder}"
+        "cwd": "${config:zorroFolder}",
+        "env": {
+            "fileName": "${workspaceFolderBasename}.dll",
+            "fileName64": "${workspaceFolderBasename}64.dll"
+        },
+        "shell": {
+            "executable": "cmd",
+            "args": ["/S", "/C"]
+        }
     },
     "tasks": [
+
+        //main build tasks
+
         {
-            "label": "x64",
+            "label": "x86",
             "type": "shell",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "echoStart",
+                "delFiles",
+                "compile",
+                "typeLog",
+                "echoDone"
+            ],
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
+        },
+        {
+            "label": "x64",
+            "type": "shell",
             "dependsOrder": "sequence",
             "dependsOn": [
-                "ls",
+                "echoStart",
+                "delFiles",
                 "compile64",
-                //"echoLog"
+                "typeLog",
+                "echoDone"
+            ],
+            "group": {
+                "kind": "build",
+            },
+        },
+
+
+        //seqences
+        {
+            "label": "compile",
+            "type": "process",
+            "command" : "Source\\VC++\\compile.bat",
+            "args": [
+                "${workspaceFolder}\\main.cpp",
+                "${config:zorroFolder}\\${config:strategyFolder}\\${workspaceFolderBasename}.dll",
+                "${config:vcPath}"
             ]
         },
         {
             "label": "compile64",
-            "type": "shell",
-            
-            "command" : "Source\\VC++\\compile.bat",
+            "type": "process",
+            "command" : "Source\\VC++\\compile64.bat",
             "args": [
-                "'${workspaceFolder}\\main.cpp'",
-                "'${config:zorroFolder}\\${config:strategyFolder}\\fin.dll'",
-                "'${config:vcPath}'"
+                "${workspaceFolder}\\main.cpp",
+                "${config:zorroFolder}\\${config:strategyFolder}\\${workspaceFolderBasename}64.dll",
+                "${config:vcPath}"
             ]
         },
         {
-            "label": "ls",
+            "label": "delFiles",
             "type": "shell",
-            "command" : "ls"
+            "command": "if exist \"${config:strategyFolder}\\${workspaceFolderBasename}.dll\" del \"${config:strategyFolder}\\${workspaceFolderBasename}.dll\" && if exist \"${config:strategyFolder}\\${workspaceFolderBasename}64.dll\" del \"${config:strategyFolder}\\${workspaceFolderBasename}64.dll\""
+        },
+        {
+            "label": "typeLog",
+            "type": "shell",
+            "command": "type",
+            "args":["Log\\compiler.log"]
+        },
+        {
+            "label": "echoStart",
+            "type": "shell",
+            "command": "echo",
+            "args":["================== START"]
+        },
+        {
+            "label": "echoDone",
+            "type": "shell",
+            "command": "echo",
+            "args":["================== FINISH"]
         }
     ]
 }
