@@ -1,0 +1,40 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "options": {
+        "cwd": "${config:zorroFolder}"
+    },
+    "tasks": [
+        {
+            "label": "x64",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "ls",
+                "compile64",
+                //"echoLog"
+            ]
+        },
+        {
+            "label": "compile64",
+            "type": "shell",
+            
+            "command" : "Source\\VC++\\compile.bat",
+            "args": [
+                "'${workspaceFolder}\\main.cpp'",
+                "'${config:zorroFolder}\\${config:strategyFolder}\\fin.dll'",
+                "'${config:vcPath}'"
+            ]
+        },
+        {
+            "label": "ls",
+            "type": "shell",
+            "command" : "ls"
+        }
+    ]
+}

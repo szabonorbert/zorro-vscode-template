@@ -1,0 +1,13 @@
+{
+    "configurations": [
+        {
+            "name": "zorro",
+            "compilerPath": "${config:compilerPath}",
+            "includePath": [
+                "${config:zorroFolder}/include/**",
+                "${workspaceFolder}/**"
+            ]
+        }
+    ],
+    "version": 4
+}
