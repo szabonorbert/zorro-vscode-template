@@ -1,7 +1,6 @@
-# Zorro VSCode template
+# Zorro project template for VSCode
 
-An ideal starting point of a C++ [Zorro](https://zorro-project.com/) project with VSCode (Visual Studio Code).<br />
-You can edit and compile directly from the VSCode IDE, therefore
+An ideal starting point of a C++ [Zorro](https://zorro-project.com/) project with VSCode (Visual Studio Code). You can edit and compile directly from the VSCode IDE, therefore
 
 * you can build as huge software as you want even with a complex structure without messing up the strategy folder,
 * you don't need to squeeze your files to Zorro's standard folders, and
@@ -15,7 +14,7 @@ The result DLL file will be automatically copied to your Zorro's strategy folder
 ## Zorro, C++, and VSCode
 Zorro's native language is "lite-C", however the built-in functions are totally compatible with C and C++ as expected. In the Zorro Help you can find a tutorial about setting up a project in Visual Studio and/or it's compiler for making Zorro scripts: [Developing Algo Trading Systems in C++](https://zorro-project.com/manual/en/dlls.htm).
 
-I made this sample project to kickstart your development; therefore, you don't need to do all the setup procedures everytime you start to work on something new. I used the compiler script that Zorro shipped with; if you want to make more complex compilations like extended linker objectives, you need to edit the compiler batch located in the Zorro folder in ```Source\VC++\compile.bat``` and ```Source\VC++\compile64.bat```.
+I made this sample project to kickstart your development; therefore, you don't need to do all the setup procedures everytime you start working on something new. I used the compiler script that Zorro shipped with; if you want to make more complex compilations like extended linker objectives, you need to edit the compiler batch located in the Zorro folder in ```Source\VC++\compile.bat``` and ```Source\VC++\compile64.bat```.
 
 ## Dependencies
 
@@ -48,7 +47,7 @@ It's important to review the settings in the ```.vscode\settings.json``` file.
 * ```compilerPath```: the path to ```cl.exe```, it is needed for IntelliSense to check your code errors
 * ```msvcBuildPath``` the route to the MSVC Build folder, usually it's ```C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\Build```
 
-After you changed these settings I recommend you to restart VSCode.
+I recommend you to restart VSCode after you changed these settings.
 
 #### Other settings
 
@@ -56,4 +55,4 @@ The ```tasks.json``` is only important if you want to change the default build t
 
 ## Build
 
-Press <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>b</kbd> to build your Zorro strategy. It automatically copies the result dll file to the Zorro strategy folder; the file name will be the working directory's name. If you compile with the x64 task, you can run the result with Zorro64.
+Press <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>b</kbd> to build your Zorro strategy. It automatically copies the result dll file to the Zorro strategy folder; the file name will be the working directory's name. If you compile with the x64 task, you will see that DLL filenames end with "64", because it's neccessary for running with Zorro64.
