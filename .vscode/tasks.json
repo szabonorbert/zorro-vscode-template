@@ -57,7 +57,7 @@
             "args": [
                 "${workspaceFolder}\\main.cpp",
                 "${config:zorroFolder}\\${config:strategyFolder}\\${workspaceFolderBasename}.dll",
-                "${config:vcPath}"
+                "${config:msvcBuildPath}"
             ]
         },
         {
@@ -68,7 +68,7 @@
             "args": [
                 "${workspaceFolder}\\main.cpp",
                 "${config:zorroFolder}\\${config:strategyFolder}\\${workspaceFolderBasename}64.dll",
-                "${config:vcPath}"
+                "${config:msvcBuildPath}"
             ]
         },
         {
