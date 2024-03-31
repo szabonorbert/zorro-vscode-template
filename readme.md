@@ -48,6 +48,8 @@ It's important to review the settings in the ```.vscode\settings.json``` file.
 * ```compilerPath```: the path to ```cl.exe```, it is needed for IntelliSense to check your code errors
 * ```msvcBuildPath``` the route to the MSVC Build folder, usually it's ```C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\Build```
 
+After you changed these settings I recommend you to restart VSCode.
+
 #### Other settings
 
 The ```tasks.json``` is only important if you want to change the default build task from x86 to x64. In the ```c_cpp_properties.json``` you can define more include paths, but if you change it, you also need to edit the Zorro's build batch files.
