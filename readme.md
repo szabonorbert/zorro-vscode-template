@@ -55,4 +55,4 @@ The ```tasks.json``` is only important if you want to change the default build t
 
 ## Build
 
-Press <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>b</kbd> to build your Zorro strategy. It automatically copies the result dll file to the Zorro strategy folder; the file name will be the working directory's name. If you compile with the x64 task, you will see that DLL filenames end with "64", because it's neccessary for running with Zorro64.
+Press <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>b</kbd> to build your Zorro strategy. It automatically copies the result dll file to the Zorro strategy folder; the filename will be the working directory's name. If you compile with the x64 task, you will see that DLL filenames end with "64" because it's necessary for running with Zorro64.
