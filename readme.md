@@ -45,13 +45,13 @@ It's important to review the settings in the ```.vscode\settings.json``` file.
 
 * ```zorroFolder```: The install location of Zorro
 * ```strategyFolder```: You strategy folder inside the Zorro folder
-* ```compilerPath```: the path to ```cl.exe```, it is needed for the IntelliSense to check you code errors
-* ```msvcBuildPath``` the route to the MSVC Build folder, usually it's ```C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\Build```. 
+* ```compilerPath```: the path to ```cl.exe```, it is needed for IntelliSense to check your code errors
+* ```msvcBuildPath``` the route to the MSVC Build folder, usually it's ```C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\Build```
 
 #### Other settings
 
-The ```tasks.json``` is only important if you want to change the default build task from x86 to x64. In the ```c_cpp_properties.json``` you can define the include paths, but if you change it, you also need to edit the Zorro's build batch files.
+The ```tasks.json``` is only important if you want to change the default build task from x86 to x64. In the ```c_cpp_properties.json``` you can define more include paths, but if you change it, you also need to edit the Zorro's build batch files.
 
 ## Build
 
- Press <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>b</kbd> to build your Zorro strategy. It automatically copies the result dll file to the Zorro strategy folder; the file name will be the working directory's name. If you compile with the x64 task, you can run the result with Zorro64.
+Press <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>b</kbd> to build your Zorro strategy. It automatically copies the result dll file to the Zorro strategy folder; the file name will be the working directory's name. If you compile with the x64 task, you can run the result with Zorro64.
