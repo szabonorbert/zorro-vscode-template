@@ -39,7 +39,7 @@ StrategyFolder = "myStrategy"
 
 ## Setup
 
-This template is basically some config files in the ```.vscode``` folder. Bit it's important to review the settings in the ```settings.json``` file.
+It's important to review the settings in the ```.vscode\settings.json``` file.
 
 ### settings.json
 
