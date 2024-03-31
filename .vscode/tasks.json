@@ -1,20 +1,14 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
     "version": "2.0.0",
     "presentation": {
         "echo": false,
         "showReuseMessage": false
-      },
+    },
     "options": {
         "cwd": "${config:zorroFolder}",
-        "env": {
-            "fileName": "${workspaceFolderBasename}.dll",
-            "fileName64": "${workspaceFolderBasename}64.dll"
-        },
         "shell": {
             "executable": "cmd",
-            "args": ["/S", "/C"]
+            "args": ["/d", "/c"]
         }
     },
     "tasks": [
@@ -53,10 +47,11 @@
             },
         },
 
-
         //seqences
+
         {
             "label": "compile",
+            "hide": true,
             "type": "process",
             "command" : "Source\\VC++\\compile.bat",
             "args": [
@@ -67,6 +62,7 @@
         },
         {
             "label": "compile64",
+            "hide": true,
             "type": "process",
             "command" : "Source\\VC++\\compile64.bat",
             "args": [
@@ -77,26 +73,30 @@
         },
         {
             "label": "delFiles",
+            "hide": true,
             "type": "shell",
             "command": "if exist \"${config:strategyFolder}\\${workspaceFolderBasename}.dll\" del \"${config:strategyFolder}\\${workspaceFolderBasename}.dll\" && if exist \"${config:strategyFolder}\\${workspaceFolderBasename}64.dll\" del \"${config:strategyFolder}\\${workspaceFolderBasename}64.dll\""
         },
         {
             "label": "typeLog",
+            "hide": true,
             "type": "shell",
             "command": "type",
-            "args":["Log\\compiler.log"]
+            "args": ["Log\\compiler.log"]
         },
         {
             "label": "echoStart",
+            "hide": true,
             "type": "shell",
             "command": "echo",
-            "args":["================== START"]
+            "args": ["================== START"]
         },
         {
             "label": "echoDone",
+            "hide": true,
             "type": "shell",
             "command": "echo",
-            "args":["================== FINISH"]
+            "args": ["================== FINISH"]
         }
     ]
 }
