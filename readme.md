@@ -20,7 +20,7 @@ I made this sample project to kickstart your development; therefore, you don't n
 
 ### MSVC
 
-The Zorro compile batch scripts are using the Microsoft's C++ compiler, so you need that, even if you don't want to use the Visual Studio IDE. You can get MSVC by installing the Visual Studio Community Edition and the C++ extensions, as the Zorro manual suggests. Or alternatively you can download only the build dependencies from Microsoft.
+The Zorro compile batch scripts are using Microsoft's C++ compiler, so you need that, even if you don't want to use the Visual Studio IDE. You can get MSVC by installing the Visual Studio Community Edition and the C++ extensions, as the Zorro manual suggests. Or alternatively you can download only the build dependencies from Microsoft.
 
 ### C++ with IntelliSense VSCode extension
 
