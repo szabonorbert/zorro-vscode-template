@@ -1,6 +1,7 @@
 # Zorro VSCode template
 
-An ideal starting point of a C++ [Zorro](https://zorro-project.com/) project with VSCode (Visual Studio Code). You can edit and compile from the VSCode IDE, therefore
+An ideal starting point of a C++ [Zorro](https://zorro-project.com/) project with VSCode (Visual Studio Code).<br />
+You can edit and compile directly from the VSCode IDE, therefore
 
 * you can build as huge software as you want even with a complex structure without messing up the strategy folder,
 * you don't need to squeeze your files to Zorro's standard folders, and
