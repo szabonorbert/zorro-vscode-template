@@ -43,10 +43,10 @@ It's important to review the settings in the ```.vscode\settings.json``` file.
 
 ### settings.json
 
-* ```zorroFolder```: The install location of Zorro.
-* ```strategyFolder```: Your strategy folder inside the Zorro folder.
+* ```zorroFolder```: the install location of Zorro.
+* ```strategyFolder```: your strategy folder inside the Zorro folder.
 * ```type_64_if_x64```: if you want to use Zorro, keep it blank. If you want to use Zorro64, fill this with ```64```.
-* ```compilerPath```: the path to ```cl.exe```, it is needed for IntelliSense to check your code errors. It's not important to point to the 64-bit version of ```cl.exe``` to build with 64-bit since here it's used only for the IDE code check.
+* ```compilerPath```: the path to ```cl.exe```, it is needed for IntelliSense to check your code errors. (It's not important to point to the 64-bit version of ```cl.exe``` to build with 64-bit since here it's used only for the IDE code check.)
 * ```msvcBuildPath``` the route to the MSVC Build folder, usually it's ```C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\Build```.
 
 > [!CAUTION]
