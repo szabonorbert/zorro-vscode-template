@@ -61,4 +61,4 @@ The ```tasks.json``` contains the compile tasks and steps. In the ```c_cpp_prope
 
 ## Build
 
-Press <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>b</kbd> to build your Zorro strategy. It automatically copies the result dll file to the Zorro strategy folder; the filename will be the ```${workspaceFolderBasename}.dll``` or ```${workspaceFolderBasename}64.dll``` based on the build method.
+Press <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>b</kbd> to build your Zorro strategy. It automatically copies the result dll file to the Zorro strategy folder; the filename will be the ```[foldername].dll``` or ```[foldername]64.dll``` based on the build method.
