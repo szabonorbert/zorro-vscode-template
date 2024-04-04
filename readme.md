@@ -26,7 +26,8 @@ The Zorro compile batch scripts are using Microsoft's C++ compiler, so you need 
 
 It's not required, but recommended to use C++ language support for you IDE.
 
-Step-by-step instructions for installing only the build dependencies and the recommended VSCode extension: [Configure VS Code for Microsoft C++](https://code.visualstudio.com/docs/cpp/config-msvc).
+> [!TIP]
+> Step-by-step instructions for installing only the build dependencies and the recommended VSCode extension: [Configure VS Code for Microsoft C++](https://code.visualstudio.com/docs/cpp/config-msvc).
 
 ## Zorro's custom strategy folder
 
@@ -42,17 +43,22 @@ It's important to review the settings in the ```.vscode\settings.json``` file.
 
 ### settings.json
 
-* ```zorroFolder```: The install location of Zorro
-* ```strategyFolder```: You strategy folder inside the Zorro folder
-* ```compilerPath```: the path to ```cl.exe```, it is needed for IntelliSense to check your code errors
-* ```msvcBuildPath``` the route to the MSVC Build folder, usually it's ```C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\Build```
+* ```zorroFolder```: The install location of Zorro.
+* ```strategyFolder```: Your strategy folder inside the Zorro folder.
+* ```type_64_if_x64```: if you want to use Zorro, keep it blank. If you want to use Zorro64, fill this with ```64```.
+* ```compilerPath```: the path to ```cl.exe```, it is needed for IntelliSense to check your code errors. It's not important to point to the 64-bit version of ```cl.exe``` to build with 64-bit since here it's used only for the IDE code check.
+* ```msvcBuildPath``` the route to the MSVC Build folder, usually it's ```C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\Build```.
 
-I recommend you to restart VSCode after you changed these settings.
+> [!CAUTION]
+> I prefer Zorro64 because of the memory and speed increase. So when you compile with the basic settings of this repository, <b>your result filename will be ```[foldername]64.dll```, and you can run it only with Zorro64</b>. The filename needs to end with ```...64.dll``` to be able to be run by Zorro64. If you want to use the regular Zorro (without 64), you need to use the x86 compiler, so ```type_64_if_x64``` should be empty.
 
-#### Other settings
+> [!TIP]
+> I recommend you to restart VSCode after you changed these settings.
 
-The ```tasks.json``` is only important if you want to change the default build task from x86 to x64. In the ```c_cpp_properties.json``` you can define more include paths, but if you change it, you also need to edit the Zorro's build batch files.
+### Other settings
+
+The ```tasks.json``` contains the compile tasks and steps. In the ```c_cpp_properties.json``` you can define more include paths, but if you change it, you also need to edit the Zorro's build batch files.
 
 ## Build
 
-Press <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>b</kbd> to build your Zorro strategy. It automatically copies the result dll file to the Zorro strategy folder; the filename will be the working directory's name. If you compile with the x64 task, you will see that DLL filenames end with "64" because it's necessary for running with Zorro64.
+Press <kbd>ctrl</kbd> + <kbd>shift</kbd> + <kbd>b</kbd> to build your Zorro strategy. It automatically copies the result dll file to the Zorro strategy folder; the filename will be the ```${workspaceFolderBasename}.dll``` or ```${workspaceFolderBasename}64.dll``` based on the build method.
