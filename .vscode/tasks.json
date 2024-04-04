@@ -13,10 +13,10 @@
     },
     "tasks": [
 
-        //main build tasks
+        //main build task
 
         {
-            "label": "x86",
+            "label": "build",
             "type": "shell",
             "dependsOrder": "sequence",
             "dependsOn": [
@@ -30,50 +30,25 @@
                 "isDefault": true
             },
         },
-        {
-            "label": "x64",
-            "type": "shell",
-            "dependsOrder": "sequence",
-            "dependsOn": [
-                "delFiles",
-                "compile64",
-                "typeLog",
-                "echoDone"
-            ],
-            "group": {
-                "kind": "build",
-            },
-        },
 
         //seqences
 
         {
-            "label": "compile",
-            "hide": true,
-            "type": "process",
-            "command" : "Source\\VC++\\compile.bat",
-            "args": [
-                "${workspaceFolder}\\main.cpp",
-                "${config:zorroFolder}\\${config:strategyFolder}\\${workspaceFolderBasename}.dll",
-                "${config:msvcBuildPath}"
-            ]
-        },
-        {
-            "label": "compile64",
-            "hide": true,
-            "type": "process",
-            "command" : "Source\\VC++\\compile64.bat",
-            "args": [
-                "${workspaceFolder}\\main.cpp",
-                "${config:zorroFolder}\\${config:strategyFolder}\\${workspaceFolderBasename}64.dll",
-                "${config:msvcBuildPath}"
-            ]
-        },
-        {
             "label": "delFiles",
             "hide": true,
             "type": "shell",
-            "command": "if exist \"${config:strategyFolder}\\${workspaceFolderBasename}.dll\" del \"${config:strategyFolder}\\${workspaceFolderBasename}.dll\" && if exist \"${config:strategyFolder}\\${workspaceFolderBasename}64.dll\" del \"${config:strategyFolder}\\${workspaceFolderBasename}64.dll\""
+            "command": "(if exist \"${config:strategyFolder}\\${workspaceFolderBasename}.dll\" del \"${config:strategyFolder}\\${workspaceFolderBasename}.dll\") & (if exist \"${config:strategyFolder}\\${workspaceFolderBasename}64.dll\" del \"${config:strategyFolder}\\${workspaceFolderBasename}64.dll\")"
+        },
+        {
+            "label": "compile",
+            "hide": true,
+            "type": "process",
+            "command" : "Source\\VC++\\compile${config:type_64_if_x64}.bat",
+            "args": [
+                "${workspaceFolder}\\main.cpp",
+                "${config:zorroFolder}\\${config:strategyFolder}\\${workspaceFolderBasename}${config:type_64_if_x64}.dll",
+                "${config:msvcBuildPath}"
+            ]
         },
         {
             "label": "typeLog",
