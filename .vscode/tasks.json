@@ -20,7 +20,6 @@
             "type": "shell",
             "dependsOrder": "sequence",
             "dependsOn": [
-                "echoStart",
                 "delFiles",
                 "compile",
                 "typeLog",
@@ -36,7 +35,6 @@
             "type": "shell",
             "dependsOrder": "sequence",
             "dependsOn": [
-                "echoStart",
                 "delFiles",
                 "compile64",
                 "typeLog",
@@ -85,18 +83,11 @@
             "args": ["Log\\compiler.log"]
         },
         {
-            "label": "echoStart",
-            "hide": true,
-            "type": "shell",
-            "command": "echo",
-            "args": ["================== START"]
-        },
-        {
             "label": "echoDone",
             "hide": true,
             "type": "shell",
             "command": "echo",
-            "args": ["================== FINISH"]
+            "args": ["================== DONE"]
         }
     ]
 }
