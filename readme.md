@@ -52,6 +52,9 @@ It's important to review the settings in the ```.vscode\settings.json``` file.
 > [!CAUTION]
 > I prefer Zorro64 because of the memory and speed increase. So when you compile with the basic settings of this repository, <b>your result filename will be ```[foldername]64.dll```, and you can run it only with Zorro64</b>. The filename needs to end with ```...64.dll``` to be able to be run by Zorro64. If you want to use the regular Zorro (without 64), you need to use the x86 compiler, so ```type_64_if_x64``` should be empty.
 
+> [!CAUTION]
+> If you get an error about ```cl.exe``` is not found, double-check the ```msvcBuildPath``` folder in the ```settings.json``` file, because this is where the prebuild configs are located. If you have any typos, the PATH cannot load the correct cl.exe for the compile process.
+
 > [!TIP]
 > I recommend you to restart VSCode after you changed these settings.
 
