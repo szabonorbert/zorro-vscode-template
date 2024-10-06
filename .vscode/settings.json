@@ -2,6 +2,6 @@
   "zorroFolder": "C:\\zorro",
   "strategyFolder": "myStrategy",
   "type_64_if_x64": "64",
-  "compilerPath": "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.37.32822\\bin\\Hostx86\\x86\\cl.exe",
-  "msvcBuildPath": "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\Build"
+  "compilerPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.41.34120\\bin\\Hostx86\\x86\\cl.exe",
+  "msvcBuildPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Auxiliary\\Build"
 }
