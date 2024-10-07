@@ -82,8 +82,11 @@ if "%~4"=="64" (
 if "%~4"=="64" (
     cl /Fo"%cacheFolder%" /EHsc /fp:strict /Zc:wchar_t /Gd /MT /O2 /D "_WINDLL" /D "_MBCS" "%mainFile%" "%zorroDLL%" /link /DLL /NOLOGO /MACHINE:X64 /IMPLIB:"%impFile%" /OUT:"%outFile%" > %logFile%
 ) else (
-    echo "build 32"
+    cl /Fo"%cacheFolder%" /EHsc /fp:strict /Zc:wchar_t /Gd /MT /O2 /D "WIN32" /D "_WINDLL" /D "_MBCS" "%mainFile%" "%zorroDLL%" /link /DLL /NOLOGO /IMPLIB:"%impFile%" /OUT:"%outFile%" > %logFile%
 )
+
+@type %LogFile%
+echo ============= DONE
 
 ::
 :::::::: Functions
