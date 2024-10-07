@@ -53,6 +53,7 @@ set "outFile=%outFile:/=\%"
 set "outFile=%outFile:\\=\%"
 @del /q "%outFile%" 2>nul
 @rmdir /q "%outFile%" 2>nul
+@mkdir ".build/cache" 2>nul
 
 :: Switch every backslash "\" to double backslash "\\" to make it compatible with cl.exe
 
