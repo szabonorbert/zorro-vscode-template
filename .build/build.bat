@@ -26,6 +26,7 @@ if "%~4"=="64" (
     set "scriptname=%scriptname%.dll"
 )
 
+set "cacheFolder=%CD%\.build\cache\"
 set "impFile=%CD%\.build\cache\Imp.lib"
 set "logFile=%CD%\.build\compiler.log"
 set "mainFile=%CD%\main.cpp"
@@ -38,6 +39,7 @@ set "outFile=%~2\%~3\%scriptname%"
 
 :: Switch every accidental input slash "/" to backslash "\"
 
+set "cacheFolder=%cacheFolder:/=\%"
 set "impFile=%impFile:/=\%"
 set "logFile=%logFile:/=\%"
 set "mainFile=%mainFile:/=\%"
@@ -47,11 +49,12 @@ set "outFile=%outFile:/=\%"
 :: Delete outfile or accidental directories
 
 set "outFile=%outFile:\\=\%"
-@del /q "%outFile%"
-@rmdir /q "%outFile%"
+@del /q "%outFile%" 2>nul
+@rmdir /q "%outFile%" 2>nul
 
 :: Switch every backslash "\" to double backslash "\\" to make it compatible with cl.exe
 
+set "cacheFolder=%cacheFolder:\=\\%"
 set "impFile=%impFile:\=\\%"
 set "logFile=%logFile:\=\\%"
 set "mainFile=%mainFile:\=\\%"
@@ -82,8 +85,6 @@ if "%~4"=="64" (
     echo "build 32"
 )
 
-endlocal
-
 ::
 :::::::: Functions
 ::
@@ -100,3 +101,5 @@ set "tmp=%tmp:/=\%"
 set "tmp=%tmp:\=\\%"
 set "%~1=%tmp%"
 goto :eof
+
+endlocal
