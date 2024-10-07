@@ -26,6 +26,7 @@ if "%~4"=="64" (
     set "scriptname=%scriptname%.dll"
 )
 
+set "vcFolder=%~1"
 set "cacheFolder=%CD%\.build\cache\"
 set "impFile=%CD%\.build\cache\Imp.lib"
 set "logFile=%CD%\.build\compiler.log"
@@ -39,6 +40,7 @@ set "outFile=%~2\%~3\%scriptname%"
 
 :: Switch every accidental input slash "/" to backslash "\"
 
+set "vcFolder=%vcFolder:/=\%"
 set "cacheFolder=%cacheFolder:/=\%"
 set "impFile=%impFile:/=\%"
 set "logFile=%logFile:/=\%"
@@ -54,6 +56,7 @@ set "outFile=%outFile:\\=\%"
 
 :: Switch every backslash "\" to double backslash "\\" to make it compatible with cl.exe
 
+set "vcFolder=%vcFolder:\=\\%"
 set "cacheFolder=%cacheFolder:\=\\%"
 set "impFile=%impFile:\=\\%"
 set "logFile=%logFile:\=\\%"
@@ -68,9 +71,9 @@ set "outFile=%outFile:\=\\%"
 :: prepare the compiler
 
 if "%~4"=="64" (
-    @call "%~1\vcvars64.bat"
+    @call "%vcFolder%\\vcvars64.bat"
 ) else (
-    @call "%~1\vcvars32.bat"
+    @call "%vcFolder%\\vcvars32.bat"
 )
 
 :: add some extra include paths
