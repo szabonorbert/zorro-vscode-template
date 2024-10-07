@@ -1,4 +1,4 @@
-//call example from project parent folder
+//call example from project's root folder
 //".build/build.bat" "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build" "C:\zorro" "myStrategy" "64"
 {
     "version": "2.0.0",
