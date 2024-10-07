@@ -2,7 +2,7 @@
     "configurations": [
         {
             "name": "zorro",
-            "compilerPath": "${config:compilerPath}",
+            "compilerPath": "${config:compilerExe}",
             "includePath": [
                 "${config:zorroFolder}/include/**",
                 "${workspaceFolder}/**"
