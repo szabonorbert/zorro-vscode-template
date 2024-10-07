@@ -38,7 +38,7 @@ set "outFile=%~2\%~3\%scriptname%"
 :: so need to modify it one-by-one to force the paths compatible with cl.exe
 :: (cl.exe is forcing to evaluates the input strings, so the backslashes are treated as special characters)
 
-:: Switch every accidental input slash "/" to backslash "\"
+:: switch every accidental input slash "/" to backslash "\"
 
 set "vcFolder=%vcFolder:/=\%"
 set "cacheFolder=%cacheFolder:/=\%"
@@ -48,14 +48,14 @@ set "mainFile=%mainFile:/=\%"
 set "zorroDLL=%zorroDLL:/=\%"
 set "outFile=%outFile:/=\%"
 
-:: Delete outfile or accidental directories
+:: delete outfile or accidental directories
 
 set "outFile=%outFile:\\=\%"
-@del /q "%outFile%" 2>nul
-@rmdir /q "%outFile%" 2>nul
-@mkdir ".build/cache" 2>nul
+del /q "%outFile%" 2>nul
+rmdir /q "%outFile%" 2>nul
+mkdir ".build/cache" 2>nul
 
-:: Switch every backslash "\" to double backslash "\\" to make it compatible with cl.exe
+:: switch every backslash "\" to double backslash "\\" to make it compatible with cl.exe
 
 set "vcFolder=%vcFolder:\=\\%"
 set "cacheFolder=%cacheFolder:\=\\%"
@@ -72,14 +72,14 @@ set "outFile=%outFile:\=\\%"
 :: prepare the compiler
 
 if "%~4"=="64" (
-    @call "%vcFolder%\\vcvars64.bat"
+    call "%vcFolder%\\vcvars64.bat"
 ) else (
-    @call "%vcFolder%\\vcvars32.bat"
+    call "%vcFolder%\\vcvars32.bat"
 )
 
 :: add some extra include paths
 
-@set "INCLUDE=%INCLUDE%;%CD%;%~2\include"
+set "INCLUDE=%INCLUDE%;%CD%;%~2\include"
 
 :: compile the script
 
@@ -89,8 +89,9 @@ if "%~4"=="64" (
     cl /Fo"%cacheFolder%" /EHsc /fp:strict /Zc:wchar_t /Gd /MT /O2 /D "WIN32" /D "_WINDLL" /D "_MBCS" "%mainFile%" "%zorroDLL%" /link /DLL /NOLOGO /IMPLIB:"%impFile%" /OUT:"%outFile%" > %logFile%
 )
 
-@type %LogFile%
-echo ============= DONE
+type %LogFile%
+echo:
+echo ======================= DONE
 
 ::
 :::::::: Functions
