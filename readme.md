@@ -15,7 +15,7 @@ The result DLL file will be automatically copied to your Zorro's strategy folder
 
 ### MSVC
 
-This project's compile script is based on Zorro's original compile bat files to avoid unnecessary headaches, so we also use VC++. You can install the Visual Studio Community Edition as the Zorro manual suggests, but to use with VSCode, you don't need the whole Visual Studio IDE but the VC++ build dependencies, which you can easily install with the official instructions:  
+This project's compile script is based on Zorro's original compile batch files to avoid unnecessary headaches, so we also use VC++. You can install the Visual Studio Community Edition as the Zorro manual suggests, but to use with VSCode, you don't need the whole Visual Studio IDE but the VC++ build dependencies, which you can easily install with the official instructions:  
 [Install the Microsoft Visual C++ (MSVC) compiler toolset](https://code.visualstudio.com/docs/cpp/config-msvc#_prerequisites)
 
 ### C++ with IntelliSense VSCode extension
@@ -37,7 +37,7 @@ It's important to review the settings in the ```.vscode\settings.json``` file.
 * ```zorroFolder```: the install location of Zorro.
 * ```strategyFolder```: your strategy folder inside the Zorro folder.
 * ```type_64_if_x64```: if you want to use Zorro, keep it blank. If you want to use Zorro64, fill this with ```64```.
-* ```compilerExe```: the path to any ```cl.exe```, it' i's needed for IntelliSense to check your code errors on the fly.
+* ```compilerExe```: the path to any ```cl.exe```, it's needed for IntelliSense to check your code errors on the fly.
 * ```msvcBuildPath```: the route to the MSVC build folder.
 
 If you are not sure, you can get the ```compilerExe``` and the ```msvcBuildPath``` easily from the [developer console](https://code.visualstudio.com/docs/cpp/config-msvc#_check-your-microsoft-visual-c-installation).
