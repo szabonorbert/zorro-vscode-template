@@ -11,27 +11,19 @@ The result DLL file will be automatically copied to your Zorro's strategy folder
 > [!NOTE]
 > This template was made for VSCode. If you need a template for Visual Studio (as the Zorro manual suggests), have a look at the [szabonorbert/zorro-project-template](https://github.com/szabonorbert/zorro-project-template) repository.</b>
 
-## Zorro, C++, and VSCode
-Zorro's native language is "lite-C", however the built-in functions are totally compatible with C and C++ as expected. In the Zorro Help you can find a tutorial about setting up a project in Visual Studio and/or it's compiler for making Zorro scripts: [Developing Algo Trading Systems in C++](https://zorro-project.com/manual/en/dlls.htm).
-
-I made this sample project to kickstart your development; therefore, you don't need to do all the setup procedures everytime you start working on something new. I used the compiler script that Zorro shipped with; if you want to make more complex compilations like extended linker objectives, you need to edit the compiler batch located in the Zorro folder in ```Source\VC++\compile.bat``` and ```Source\VC++\compile64.bat```.
-
-## Dependencies
+## Dependencies and best practices
 
 ### MSVC
 
-The Zorro compile batch scripts are using Microsoft's C++ compiler, so you need that, even if you don't want to use the Visual Studio IDE. You can get MSVC by installing the Visual Studio Community Edition and the C++ extensions, as the Zorro manual suggests. Or alternatively you can download only the build dependencies from Microsoft.
+This project's compile script is based on Zorro's original compile bat files to avoid unnecessary headaches, so we also use VC++. You can install the Visual Studio Community Edition as the Zorro manual suggests, but to use with VSCode, you don't need the while Visual Studio IDE but the VC++ build dependencies, which you can easily install with [the official instructions](https://code.visualstudio.com/docs/cpp/config-msvc#_prerequisites).
 
 ### C++ with IntelliSense VSCode extension
 
-It's not required, but recommended to use C++ language support for you IDE.
+It's not required, but recommended to use C++ language support for your IDE.
 
-> [!TIP]
-> Step-by-step instructions for installing only the build dependencies and the recommended VSCode extension: [Configure VS Code for Microsoft C++](https://code.visualstudio.com/docs/cpp/config-msvc).
+### Zorro's custom strategy folder
 
-## Zorro's custom strategy folder
-
-I recommend you to create a custom strategy folder where you can keep all your scripts separately from the standard Zorro sample projects. You can do this simply by define the strategy folder in ```ZorroFix.ini```:
+It's also not required, but I recommend you create a custom strategy folder where you can keep all your scripts separately from the standard Zorro sample projects. You can do this simply by defining the strategy folder in ```ZorroFix.ini```:
 ```
 StrategyFolder = "myStrategy"
 ```
@@ -41,16 +33,22 @@ StrategyFolder = "myStrategy"
 
 It's important to review the settings in the ```.vscode\settings.json``` file.
 
-### settings.json
-
 * ```zorroFolder```: the install location of Zorro.
 * ```strategyFolder```: your strategy folder inside the Zorro folder.
 * ```type_64_if_x64```: if you want to use Zorro, keep it blank. If you want to use Zorro64, fill this with ```64```.
-* ```compilerPath```: the path to ```cl.exe```, it is needed for IntelliSense to check your code errors. (It's not important to point to the 64-bit version of ```cl.exe``` to build with 64-bit since here it's used only for the IDE code check.)
-* ```msvcBuildPath``` the route to the MSVC Build folder, usually it's ```C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\Build```.
+* ```compilerExe```: the path to any ```cl.exe```, it is needed for IntelliSense only to check your code errors on the fly.
+* ```msvcBuildPath```: the route to the MSVC build folder.
 
-> [!CAUTION]
-> If you get an error about ```cl.exe``` is not found, double-check the ```msvcBuildPath``` folder in the ```settings.json``` file, because this is where the prebuild configs are located. If you have any typos, the system cannot load the correct ```cl.exe``` to the ```PATH```, and the compile process will fail.
+If you are not sure, you can get the ```compilerExe``` and the ```msvcBuildPath``` easily from the [developer console](https://code.visualstudio.com/docs/cpp/config-msvc#_check-your-microsoft-visual-c-installation).
+
+```
+where cl
+```
+```
+dir vcvars64.bat /S
+```
+
+Remember that in ```.vscode\settings.json``` you need to use double backslashes in the folder names.
 
 > [!TIP]
 > I prefer Zorro64 because of the memory and speed increase. So when you compile with the basic settings of this repository, <b>your result filename will be ```[foldername]64.dll```, and you can run it only with Zorro64</b>. The filename needs to end with ```...64.dll``` to be able to be run by Zorro64. If you want to use the regular Zorro (without 64), you need to use the x86 compiler, so ```type_64_if_x64``` should be empty.
@@ -60,7 +58,7 @@ It's important to review the settings in the ```.vscode\settings.json``` file.
 
 ### Other settings
 
-The ```tasks.json``` contains the compile tasks and steps. In the ```c_cpp_properties.json``` you can define more include paths, but if you change it, you also need to edit the Zorro's build batch files.
+In the ```c_cpp_properties.json``` you can define more include paths, but if you change it, you also need to edit the ```build.bat``` file.
 
 ## Build
 
