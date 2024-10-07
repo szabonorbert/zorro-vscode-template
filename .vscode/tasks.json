@@ -1,3 +1,5 @@
+//call example from project parent folder
+//".build/build.bat" "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build" "C:\zorro" "myStrategy" "64"
 {
     "version": "2.0.0",
     "presentation": {
@@ -5,7 +7,6 @@
         "showReuseMessage": false
     },
     "options": {
-        "cwd": "${config:zorroFolder}",
         "shell": {
             "executable": "cmd",
             "args": ["/d", "/c"]
@@ -17,13 +18,13 @@
 
         {
             "label": "build",
-            "type": "shell",
-            "dependsOrder": "sequence",
-            "dependsOn": [
-                "delFiles",
-                "compile",
-                "typeLog",
-                "echoDone"
+            "type": "process",
+            "command" : ".build/build.bat",
+            "args": [
+                "${config:msvcBuildPath}",
+                "${config:zorroFolder}",
+                "${config:strategyFolder}",
+                "${config:type_64_if_x64}"
             ],
             "group": {
                 "kind": "build",
@@ -31,38 +32,5 @@
             },
         },
 
-        //seqences
-
-        {
-            "label": "delFiles",
-            "hide": true,
-            "type": "shell",
-            "command": "(if exist \"${config:strategyFolder}\\${workspaceFolderBasename}.dll\" del \"${config:strategyFolder}\\${workspaceFolderBasename}.dll\") & (if exist \"${config:strategyFolder}\\${workspaceFolderBasename}64.dll\" del \"${config:strategyFolder}\\${workspaceFolderBasename}64.dll\")"
-        },
-        {
-            "label": "compile",
-            "hide": true,
-            "type": "process",
-            "command" : "Source\\VC++\\compile${config:type_64_if_x64}.bat",
-            "args": [
-                "${workspaceFolder}\\main.cpp",
-                "${config:zorroFolder}\\${config:strategyFolder}\\${workspaceFolderBasename}${config:type_64_if_x64}.dll",
-                "${config:msvcBuildPath}"
-            ]
-        },
-        {
-            "label": "typeLog",
-            "hide": true,
-            "type": "shell",
-            "command": "type",
-            "args": ["Log\\compiler.log"]
-        },
-        {
-            "label": "echoDone",
-            "hide": true,
-            "type": "shell",
-            "command": "echo",
-            "args": ["================== DONE"]
-        }
     ]
 }
