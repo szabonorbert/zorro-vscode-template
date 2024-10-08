@@ -27,12 +27,14 @@ if "%~4"=="64" (
 )
 
 set "vcFolder=%~1"
+set "zorroFolder=%~2"
+set "strategyFolder=%~3"
 set "cacheFolder=%CD%\.build\cache\"
 set "impFile=%CD%\.build\cache\Imp.lib"
 set "logFile=%CD%\.build\compiler.log"
 set "mainFile=%CD%\main.cpp"
-set "zorroDLL=%~2\Source\VC++\ZorroDLL.cpp"
-set "outFile=%~2\%~3\%scriptname%"
+set "zorroDLL=%zorroFolder%\Source\VC++\ZorroDLL.cpp"
+set "outFile=%zorroFolder%\%strategyFolder%\%scriptname%"
 
 :: ModifyPath function at the end of this script is not working as expected
 :: so need to modify it one-by-one to force the paths compatible with cl.exe
@@ -41,6 +43,8 @@ set "outFile=%~2\%~3\%scriptname%"
 :: switch every accidental input slash "/" to backslash "\"
 
 set "vcFolder=%vcFolder:/=\%"
+set "zorroFolder=%zorroFolder:/=\%"
+set "strategyFolder=%strategyFolder:/=\%"
 set "cacheFolder=%cacheFolder:/=\%"
 set "impFile=%impFile:/=\%"
 set "logFile=%logFile:/=\%"
@@ -58,6 +62,8 @@ mkdir ".build/cache" 2>nul
 :: switch every backslash "\" to double backslash "\\" to make it compatible with cl.exe
 
 set "vcFolder=%vcFolder:\=\\%"
+set "zorroFolder=%zorroFolder:\=\\%"
+set "strategyFolder=%strategyFolder:\=\\%"
 set "cacheFolder=%cacheFolder:\=\\%"
 set "impFile=%impFile:\=\\%"
 set "logFile=%logFile:\=\\%"
@@ -79,7 +85,7 @@ if "%~4"=="64" (
 
 :: add some extra include paths
 
-set "INCLUDE=%INCLUDE%;%CD%;%~2\include"
+set "INCLUDE=%INCLUDE%;%CD%;%zorroFolder%\include"
 
 :: compile the script
 
