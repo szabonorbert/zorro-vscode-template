@@ -37,6 +37,7 @@ Review the settings in `.vscode/settings.json` before building.
 * `zorroFolder`: The installation directory of Zorro.
 * `strategyFolder`: The strategy folder inside your Zorro installation.
 * `x64`: Set to `true` to build for Zorro64. Any other value builds the 32-bit (x86) version.
+* `zorroRestart`: Set to `true` to close all running Zorro instances and launch a new one with the newly compiled script already selected, ready to run.
 * `compilerExe`: The path to `cl.exe`. This is used by IntelliSense to detect code errors while you type.
 * `msvcBuildPath`: The path to the MSVC build tools directory.
 
@@ -50,6 +51,14 @@ dir vcvars64.bat /S
 ```
 
 Remember that in ```.vscode\settings.json``` you need to use double backslashes in the folder names.
+
+> [!CAUTION]
+> By default, `zorroRestart` is set to `true`, so every build will close all running Zorro instances and launch a new one. If you have live trading or other important Zorro sessions running, set `zorroRestart` to something else (e.g. `false`) before using the build task.
+
+> [!NOTE]
+> This behavior exists because Zorro keeps the compiled DLL loaded after a script has been run, preventing it from being overwritten during the next compilation. Normally, after modifying your code, you would need to switch to a different script in the Zorro GUI, run it to unload the previous DLL, and only then compile again. This becomes tedious during rapid development.
+>
+> When `zorroRestart` is enabled, the build task simply closes Zorro before compilation and reopens it afterward with the newly compiled strategy already selected. You can immediately continue by clicking **Test**, **Train**, or **Trade**, without any extra steps.
 
 > [!TIP]
 > I prefer Zorro64 because of the memory and speed increase. So when you compile with the basic settings of this repository, <b>your result filename will be ```[foldername]64.dll```, and you can run it only with Zorro64</b>. The filename needs to end with ```...64.dll``` to be able to be run by Zorro64.
