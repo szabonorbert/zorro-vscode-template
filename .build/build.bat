@@ -5,11 +5,13 @@ setlocal
 :: 2: Zorro's main folder path e.g. "C:\zorro"
 :: 3: Zorro's startegy folder name e.g. "myStrategy"
 :: 4: Build for x64 e.g. "true"
+:: 5: Kill all Zorro processes and reopen with the most recent compiled strategy e.g. "true"
 
 echo - msvcBuildPath: %~1
 echo - zorroFolder: %~2
 echo - strategyFolder: %~3
 echo - x64: %~4
+echo - zorroRestart: %~5
 
 ::
 :::::::: Preparations
@@ -35,6 +37,8 @@ set "logFile=%CD%\.build\compiler.log"
 set "mainFile=%CD%\main.cpp"
 set "zorroDLL=%zorroFolder%\Source\VC++\ZorroDLL.cpp"
 set "outFile=%zorroFolder%\%strategyFolder%\%filename%"
+set "zorroExe=%zorroFolder%\Zorro.exe"
+set "zorro64Exe=%zorroFolder%\Zorro64\Zorro64.exe"
 
 :: ModifyPath function at the end of this script is not working as expected
 :: so need to modify it one-by-one to force the paths compatible with cl.exe
@@ -51,6 +55,8 @@ set "logFile=%logFile:/=\%"
 set "mainFile=%mainFile:/=\%"
 set "zorroDLL=%zorroDLL:/=\%"
 set "outFile=%outFile:/=\%"
+set "zorroExe=%zorroExe:/=\%"
+set "zorro64Exe=%zorro64Exe:/=\%"
 
 :: delete outfile or accidental directories
 
@@ -70,6 +76,15 @@ set "logFile=%logFile:\=\\%"
 set "mainFile=%mainFile:\=\\%"
 set "zorroDLL=%zorroDLL:\=\\%"
 set "outFile=%outFile:\=\\%"
+set "zorroExe=%zorroExe:\=\\%"
+set "zorro64Exe=%zorro64Exe:\=\\%"
+
+:: close all Zorro processes if needed
+
+if "%~5"=="true" (
+    taskkill /F /IM Zorro.exe /T >nul 2>&1
+    taskkill /F /IM Zorro64.exe /T >nul 2>&1
+)
 
 ::
 :::::::: Compile
@@ -98,6 +113,16 @@ if "%~4"=="true" (
 type %LogFile%
 echo:
 echo ======================= DONE
+
+:: open Zorro if needed
+
+if "%~5"=="true" (
+    if "%~4"=="true" (
+        start "" "%zorro64Exe%" %scriptname%
+    ) else (
+        start "" "%zorroExe%" %scriptname%
+    )
+)
 
 ::
 :::::::: Functions
