@@ -114,9 +114,14 @@ if "%~4"=="true" (
     cl /Fo"%cacheFolder%" /EHsc /fp:strict /Zc:wchar_t /Gd /MT /O2 /D "WIN32" /D "_WINDLL" /D "_MBCS" "%mainFile%" "%zorroDLL%" /link /DLL /NOLOGO /IMPLIB:"%impFile%" /OUT:"%outFile%" > %logFile%
 )
 
-type %LogFile%
-echo:
-echo ======================= DONE
+if errorlevel 1 (
+    call :PrintError
+    type "%logFile%"
+    endlocal
+    exit /b 1
+)
+
+call :PrintSuccess
 
 :: open Zorro if needed
 
@@ -127,6 +132,9 @@ if "%~5"=="true" (
         start "" "%zorroExe%" %scriptname%
     )
 )
+
+endlocal
+exit /b 0
 
 ::
 :::::::: Functions
@@ -145,4 +153,10 @@ set "tmp=%tmp:\=\\%"
 set "%~1=%tmp%"
 goto :eof
 
-endlocal
+:PrintSuccess
+powershell -NoProfile -Command "Write-Host ' SUCCESS ' -ForegroundColor White -BackgroundColor DarkGreen"
+goto :eof
+
+:PrintError
+powershell -NoProfile -Command "Write-Host ' ERROR ' -ForegroundColor White -BackgroundColor Red"
+goto :eof
