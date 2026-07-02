@@ -24,7 +24,8 @@
                 "${config:msvcBuildPath}",
                 "${config:zorroFolder}",
                 "${config:strategyFolder}",
-                "${config:type_64_if_x64}"
+                "${config:x64}",
+                "${config:zorroRestart}"
             ],
             "group": {
                 "kind": "build",

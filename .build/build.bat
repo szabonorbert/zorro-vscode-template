@@ -1,15 +1,17 @@
 @echo off
 setlocal
 
-:: 1: VC++ folder path e.g. "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build"
-:: 2: Zorro's main folder path e.g. "C:\Zorro"
-:: 3: Zorro's startegy folder name e.g. "myStrategy"
-:: 4: 32 / 64 e.g. "64"
+:: 1: VC++ folder path - e.g. "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build"
+:: 2: Zorro's main folder path - e.g. "C:\zorro"
+:: 3: Zorro's startegy folder name - e.g. "myStrategy"
+:: 4: Build for x64 - e.g. "true"
+:: 5: Kill all Zorro processes where this strategy is selected, and reopen with the most recent build - e.g. "true"
 
-echo - %~1
-echo - %~2
-echo - %~3
-echo - %~4
+echo - msvcBuildPath: %~1
+echo - zorroFolder: %~2
+echo - strategyFolder: %~3
+echo - x64: %~4
+echo - zorroRestart: %~5
 
 ::
 :::::::: Preparations
@@ -20,10 +22,10 @@ echo - %~4
 for %%A in ("%CD%") do (
     set "scriptname=%%~nA"
 )
-if "%~4"=="64" (
-    set "scriptname=%scriptname%64.dll"
+if "%~4"=="true" (
+    set "filename=%scriptname%64.dll"
 ) else (
-    set "scriptname=%scriptname%.dll"
+    set "filename=%scriptname%.dll"
 )
 
 set "vcFolder=%~1"
@@ -34,7 +36,9 @@ set "impFile=%CD%\.build\cache\Imp.lib"
 set "logFile=%CD%\.build\compiler.log"
 set "mainFile=%CD%\main.cpp"
 set "zorroDLL=%zorroFolder%\Source\VC++\ZorroDLL.cpp"
-set "outFile=%zorroFolder%\%strategyFolder%\%scriptname%"
+set "outFile=%zorroFolder%\%strategyFolder%\%filename%"
+set "zorroExe=%zorroFolder%\Zorro.exe"
+set "zorro64Exe=%zorroFolder%\Zorro64\Zorro64.exe"
 
 :: ModifyPath function at the end of this script is not working as expected
 :: so need to modify it one-by-one to force the paths compatible with cl.exe
@@ -51,6 +55,8 @@ set "logFile=%logFile:/=\%"
 set "mainFile=%mainFile:/=\%"
 set "zorroDLL=%zorroDLL:/=\%"
 set "outFile=%outFile:/=\%"
+set "zorroExe=%zorroExe:/=\%"
+set "zorro64Exe=%zorro64Exe:/=\%"
 
 :: delete outfile or accidental directories
 
@@ -70,6 +76,19 @@ set "logFile=%logFile:\=\\%"
 set "mainFile=%mainFile:\=\\%"
 set "zorroDLL=%zorroDLL:\=\\%"
 set "outFile=%outFile:\=\\%"
+set "zorroExe=%zorroExe:\=\\%"
+set "zorro64Exe=%zorro64Exe:\=\\%"
+
+:: kill all Zorro processes where the current script is selected
+
+if "%~5"=="true" (
+    for /f "tokens=2" %%P in ('tasklist /v /fi "imagename eq Zorro.exe" ^| findstr /i /r /c:"%scriptname%"') do (
+        taskkill /F /T /PID %%P >nul 2>&1
+    )
+    for /f "tokens=2" %%P in ('tasklist /v /fi "imagename eq Zorro64.exe" ^| findstr /i /r /c:"%scriptname%"') do (
+        taskkill /F /T /PID %%P >nul 2>&1
+    )
+)
 
 ::
 :::::::: Compile
@@ -77,7 +96,7 @@ set "outFile=%outFile:\=\\%"
 
 :: prepare the compiler
 
-if "%~4"=="64" (
+if "%~4"=="true" (
     call "%vcFolder%\\vcvars64.bat"
 ) else (
     call "%vcFolder%\\vcvars32.bat"
@@ -89,7 +108,7 @@ set "INCLUDE=%INCLUDE%;%CD%;%zorroFolder%\include"
 
 :: compile the script
 
-if "%~4"=="64" (
+if "%~4"=="true" (
     cl /Fo"%cacheFolder%" /EHsc /fp:strict /Zc:wchar_t /Gd /MT /O2 /D "_WINDLL" /D "_MBCS" "%mainFile%" "%zorroDLL%" /link /DLL /NOLOGO /MACHINE:X64 /IMPLIB:"%impFile%" /OUT:"%outFile%" > %logFile%
 ) else (
     cl /Fo"%cacheFolder%" /EHsc /fp:strict /Zc:wchar_t /Gd /MT /O2 /D "WIN32" /D "_WINDLL" /D "_MBCS" "%mainFile%" "%zorroDLL%" /link /DLL /NOLOGO /IMPLIB:"%impFile%" /OUT:"%outFile%" > %logFile%
@@ -98,6 +117,16 @@ if "%~4"=="64" (
 type %LogFile%
 echo:
 echo ======================= DONE
+
+:: open Zorro if needed
+
+if "%~5"=="true" (
+    if "%~4"=="true" (
+        start "" "%zorro64Exe%" %scriptname%
+    ) else (
+        start "" "%zorroExe%" %scriptname%
+    )
+)
 
 ::
 :::::::: Functions
