@@ -1,11 +1,11 @@
 @echo off
 setlocal
 
-:: 1: VC++ folder path e.g. "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build"
-:: 2: Zorro's main folder path e.g. "C:\zorro"
-:: 3: Zorro's startegy folder name e.g. "myStrategy"
-:: 4: Build for x64 e.g. "true"
-:: 5: Kill all Zorro processes and reopen with the most recent compiled strategy e.g. "true"
+:: 1: VC++ folder path - e.g. "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Auxiliary\Build"
+:: 2: Zorro's main folder path - e.g. "C:\zorro"
+:: 3: Zorro's startegy folder name - e.g. "myStrategy"
+:: 4: Build for x64 - e.g. "true"
+:: 5: Kill all Zorro processes where this strategy is selected, and reopen with the most recent build - e.g. "true"
 
 echo - msvcBuildPath: %~1
 echo - zorroFolder: %~2
@@ -79,11 +79,15 @@ set "outFile=%outFile:\=\\%"
 set "zorroExe=%zorroExe:\=\\%"
 set "zorro64Exe=%zorro64Exe:\=\\%"
 
-:: close all Zorro processes if needed
+:: kill all Zorro processes where the current script is selected
 
 if "%~5"=="true" (
-    taskkill /F /IM Zorro.exe /T >nul 2>&1
-    taskkill /F /IM Zorro64.exe /T >nul 2>&1
+    for /f "tokens=2" %%P in ('tasklist /v /fi "imagename eq Zorro.exe" ^| findstr /i /r /c:"%scriptname%"') do (
+        taskkill /F /T /PID %%P >nul 2>&1
+    )
+    for /f "tokens=2" %%P in ('tasklist /v /fi "imagename eq Zorro64.exe" ^| findstr /i /r /c:"%scriptname%"') do (
+        taskkill /F /T /PID %%P >nul 2>&1
+    )
 )
 
 ::
