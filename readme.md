@@ -37,7 +37,7 @@ Review the settings in `.vscode/settings.json` before building.
 * `zorroFolder`: The installation directory of Zorro.
 * `strategyFolder`: The strategy folder inside your Zorro installation.
 * `x64`: Set to `true` to build for Zorro64. Any other value builds the 32-bit (x86) version.
-* `zorroRestart`: Set to `true` to close all running Zorro instances and launch a new one with the newly compiled script already selected, ready to run.
+* `zorroRestart`: Set to `true` to close all running Zorro instances where the current script is selected and launch a new one, ready to run.
 * `compilerExe`: The path to `cl.exe`. This is used by IntelliSense to detect code errors while you type.
 * `msvcBuildPath`: The path to the MSVC build tools directory.
 
